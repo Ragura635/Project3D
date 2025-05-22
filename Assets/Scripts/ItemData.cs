@@ -9,7 +9,6 @@ public enum ItemType
 
 public enum ConsumableType
 {
-    Duration,
     SizeMultiplier,
     JumpPowerMultiplier,
 }
@@ -28,7 +27,8 @@ public class ItemData : ScriptableObject
     public string displayName;
     public ItemType type;
     public Sprite icon;
-    
+
     [Header("Consumable")]
+    public float duration;
     public ItemDataConsumable[] consumables;
 }

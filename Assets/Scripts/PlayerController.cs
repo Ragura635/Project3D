@@ -5,11 +5,17 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Status")]
+    public float fallDamageSpeedThreshold = -10f;
+    public float fallDamageMultiplier = 2f;
+    private bool wasGroundedLastFrame = true;
+    
     [Header("Movement")]
     public float moveSpeed;
     public float jumpPower;
     private Vector2 curMovementInput;
     public LayerMask groundLayerMask;
+    private Rigidbody _rigidbody;
 
     [Header("Look")]
     public Transform cameraContainer;
@@ -17,11 +23,16 @@ public class PlayerController : MonoBehaviour
     public float maxXLook;
     private float camCurXRot;
     public float lookSensitivity;
-
     private Vector2 mouseDelta;
     public bool canLook = true;
-
-    private Rigidbody _rigidbody;
+    
+    [Header("Item Effect")]
+    public bool canUseItem = false;
+    private bool isUsingItem = false;
+    public ItemData currentItem;
+    private Coroutine itemCoroutine;
+    private float defaultJumpPower;
+    private Vector3 defaultScale;
 
     private void Awake()
     {
@@ -31,11 +42,29 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        defaultJumpPower = jumpPower;
+        defaultScale = transform.localScale;
     }
 
     private void FixedUpdate()
     {
         Move();
+        
+        bool isGrounded = IsGrounded();
+
+        // 착지 시점에만 실행
+        if (!wasGroundedLastFrame && isGrounded)
+        {
+            float fallSpeed = _rigidbody.velocity.y;
+
+            if (fallSpeed < fallDamageSpeedThreshold) // 예: -10보다 더 빠른 하강
+            {
+                float damage = Mathf.Abs(fallSpeed) * fallDamageMultiplier;
+                ApplyFallDamage(damage);
+            }
+        }
+
+        wasGroundedLastFrame = isGrounded;
     }
 
     private void LateUpdate()
@@ -50,9 +79,14 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
         dir *= moveSpeed;
-        dir.y = GetComponent<Rigidbody>().velocity.y;
+        dir.y = _rigidbody.velocity.y;
 
-        GetComponent<Rigidbody>().velocity = dir;
+        _rigidbody.velocity = dir;
+    }
+    
+    private void ApplyFallDamage(float damage)
+    {
+        CharacterManager.Instance.Player.condition.TakeDamage(Mathf.RoundToInt(damage));
     }
     
     void CameraLook()
@@ -85,7 +119,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started && IsGrounded())
         {
-            GetComponent<Rigidbody>().AddForce(Vector2.up * jumpPower, ForceMode.Impulse);
+            _rigidbody.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
         }
     }
 
@@ -109,8 +143,46 @@ public class PlayerController : MonoBehaviour
 
         return false;
     }
+    
+    public void OnUseItem(InputAction.CallbackContext context)
+    {
+        if (!context.performed || !canUseItem || isUsingItem) return;
 
-    void ToggleCursor()
+        if (currentItem != null)
+        {
+            itemCoroutine = StartCoroutine(ApplyItemEffect(currentItem));
+        }
+    }
+
+    private IEnumerator ApplyItemEffect(ItemData item)
+    {
+        isUsingItem = true;
+        canUseItem = false;
+        UIManager.Instance.ShowUseButton(false);
+
+        float duration = item.duration;
+        float elapsedtime = 0f;
+        
+        transform.localScale = defaultScale * item.consumables[0].value;
+        jumpPower = defaultJumpPower * item.consumables[1].value;
+
+        UIManager.Instance.SetDurationFill(0f);
+
+        while (elapsedtime < duration)
+        {
+            elapsedtime += Time.deltaTime;
+            UIManager.Instance.SetDurationFill(elapsedtime / duration);
+            yield return null;
+        }
+
+        // 원래대로 복원
+        transform.localScale = defaultScale;
+        jumpPower = defaultJumpPower;
+        UIManager.Instance.SetDurationFill(1f);
+        isUsingItem = false;
+    }
+
+    private void ToggleCursor()
     {
         bool toggle = Cursor.lockState == CursorLockMode.Locked;
         Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;

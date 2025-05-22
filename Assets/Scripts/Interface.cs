@@ -5,7 +5,7 @@ public interface IInteractable
     public void OnInteract();
 }
 
-public interface Useable
+public interface IDamagable
 {
-    
+    void TakeDamage(int damage);
 }

@@ -1,18 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public Image durationImage;
+    public GameObject useButton;
+
+    public static UIManager Instance;
+
+    void Awake()
+    { 
+        Instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ShowUseButton(bool show)
     {
-        
+        useButton.SetActive(show);
+    }
+
+    public void SetDurationFill(float t)
+    {
+        durationImage.fillAmount = Mathf.Clamp01(t);
     }
 }

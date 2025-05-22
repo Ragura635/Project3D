@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3570182007387382049}
   - component: {fileID: 4475228038945700475}
   - component: {fileID: 4079023928906374020}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: TopCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6718512622453407346}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Trampoline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6948123312606620005}
   - component: {fileID: 9190475895283319769}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: SideCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -164,35 +164,35 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 8197893b8d37d554e9ba6df903d5902c, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 8197893b8d37d554e9ba6df903d5902c, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: 8197893b8d37d554e9ba6df903d5902c, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 100006, guid: 8197893b8d37d554e9ba6df903d5902c, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 100008, guid: 8197893b8d37d554e9ba6df903d5902c, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 100010, guid: 8197893b8d37d554e9ba6df903d5902c, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 100012, guid: 8197893b8d37d554e9ba6df903d5902c, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 100014, guid: 8197893b8d37d554e9ba6df903d5902c, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 100016, guid: 8197893b8d37d554e9ba6df903d5902c, type: 3}
       propertyPath: m_Name
@@ -200,7 +200,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100016, guid: 8197893b8d37d554e9ba6df903d5902c, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 8197893b8d37d554e9ba6df903d5902c, type: 3}
       propertyPath: m_LocalRotation.w

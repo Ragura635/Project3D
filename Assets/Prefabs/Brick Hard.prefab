@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8947426479931404647}
   - component: {fileID: 3686864896150380666}
   - component: {fileID: 6820591097783785644}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Brick Hard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1729131192056423656}
   - component: {fileID: 1679623450564504939}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: SideCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,7 +170,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4828616975094036462}
   - component: {fileID: 8405087855668457300}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: TopCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -20,7 +20,7 @@ rb.AddForce(Vector3.up * controller.jumpPower * jumpPowerMultiflier, ForceMode.I
 
 ---
 
-### 🧪 3. 아이템 획득 및 사용
+### 🧪 3. 아이템 들기 및 놓기
 - `ItemObject`가 `IInteractable` 인터페이스로 작동
 - `Interaction.cs`를 통해 플레이어가 카메라 중심으로 줍고, 들고 다니며, 드롭 가능
 
